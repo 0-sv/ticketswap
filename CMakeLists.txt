@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16.3)
 project(ticketswap)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_FLAGS_RELEASE "-Ofast")
 
 find_package(LibXml2 REQUIRED)
 
