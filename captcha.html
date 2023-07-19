@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title></title>
+    <style type="text/css">* {
+        margin: 0;
+        padding: 0;;
+    }
+
+    canvas#c {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        z-index: 0
+    }
+
+    button#b {
+        display: block;
+        z-index: 1;
+        padding: 1em;
+        border-radius: 50%;
+        border-color: transparent;
+        font-weight: 700;
+        font-size: 120%;
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: none;
+        visibility: "hidden"; /*transform: translate(-50%, -50%);*/
+    }
+
+    img.logo {
+        display: none;
+        visibility: hidden; /* by default */
+        z-index: 100;
+        width: 152;
+        height: 82;
+        position: absolute;
+        top: 80px;
+        left: 80px;
+    }
+
+    p.title {
+        display: none;
+        visibility: hidden; /* by default */
+        z-index: 100;
+        width: 700px;
+        height: 18px;
+        position: absolute;
+        top: 172px;
+        left: 80px;
+        font-weight: 700;
+        font-size: 120%;
+        font-family: sans-serif;
+    }</style>
+</head>
+<body><img id="logo" class="logo">
+<p class="title" id="rtitle"></p>
+<canvas id="c"></canvas>
+<button id="b">Click here</button>
+<script type="text/javascript" src="kramericaindustries.ic.lib.js"></script>
+<script type="text/javascript">
+    ;
+    ;window.rbzns = {
+        "icstyle": {
+            "pallete": ["#4285F4", "#FBBC05", "#34A853", "#F5D57A"],
+            "position": {"style": "logo"},
+            "attrs": {"html": {"dir": "ltr"}},
+            "click": {"1": "Click again", "0": "Click here"},
+            "title": "Human verification in process...",
+            "src": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABGCAYAAAA6hjFpAAAEtWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS41LjAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgZXhpZjpQaXhlbFhEaW1lbnNpb249IjEwMCIKICAgZXhpZjpQaXhlbFlEaW1lbnNpb249IjcwIgogICBleGlmOkNvbG9yU3BhY2U9IjEiCiAgIHRpZmY6SW1hZ2VXaWR0aD0iMTAwIgogICB0aWZmOkltYWdlTGVuZ3RoPSI3MCIKICAgdGlmZjpSZXNvbHV0aW9uVW5pdD0iMiIKICAgdGlmZjpYUmVzb2x1dGlvbj0iNzIvMSIKICAgdGlmZjpZUmVzb2x1dGlvbj0iNzIvMSIKICAgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIKICAgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9InNSR0IgSUVDNjE5NjYtMi4xIgogICB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wNS0yNVQxNDozODoxNCswMjowMCIKICAgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wNS0yNVQxNDozODoxNCswMjowMCI+CiAgIDx4bXBNTTpIaXN0b3J5PgogICAgPHJkZjpTZXE+CiAgICAgPHJkZjpsaQogICAgICBzdEV2dDphY3Rpb249InByb2R1Y2VkIgogICAgICBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZmZpbml0eSBEZXNpZ25lciAxLjEwLjYiCiAgICAgIHN0RXZ0OndoZW49IjIwMjMtMDUtMjVUMTQ6Mzg6MTQrMDI6MDAiLz4KICAgIDwvcmRmOlNlcT4KICAgPC94bXBNTTpIaXN0b3J5PgogIDwvcmRmOkRlc2NyaXB0aW9uPgogPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KPD94cGFja2V0IGVuZD0iciI\/PhBViU0AAAGCaUNDUHNSR0IgSUVDNjE5NjYtMi4xAAAokXWR3yuDURjHP9ssYpr8KMrF0rjaxNTiRpmEWloz5dfN9toPtR9v77ul5Va5XVHixq8L\/gJulWuliJTcck3coNfzmppkz+k5z+d8z3meznkOWCNpJaPX9EEmm9fC4wHX7Ny8q\/YROx04aKM5qujqSCgUpKq93WAx45XXrFX93L\/WsBTXFbDUCQ8rqpYXnhAOruRVkzeFW5VUdEn4WNijyQWFr009VuYnk5Nl\/jBZi4RHwdok7Er+4tgvVlJaRlhejjuTLig\/9zFf4ohnZ6Yldol3ohNmnAAuJhljFD\/9DMnsx4uPXllRJb\/vO3+KnOQqMqsU0VgmSYo8HlELUj0uMSF6XEaaotn\/v33VEwO+cnVHAOwPhvHSDbUb8FkyjPd9w\/g8ANs9nGUr+bk9GHwVvVTR3LvgXIOT84oW24LTdWi\/U6Na9FuyiVsTCXg+gsY5aLmE+oVyz372ObyFyKp81QVs70CPnHcufgEsemfLRFLnXAAAAAlwSFlzAAALEwAACxMBAJqcGAAABJZJREFUeJztnUtoXUUYx\/+TmmrrAxXR+taKBETEZmUtviiIxFLRRXElFHyVirjRpQuXKiqi1vpYqRvbhdZIC0WbYhc+q3ZVa1Woj6goVqiJtSY\/F3MvXk7uTe49d2a+c27nByGL5Mx83\/fLOWdy7swcp4oDLJF0naRLJC2TdG7j+zJJZ0r6XdLPkiZbvn8naY9z7qhByIMHcCGwAXgXmKIcR4C3gXuA86xzqh3AUuBh4MuSAuZjFtgLPAScaJ1rpQGGgY3AZAQR7TgE3A0sss69UgBDwF3At4lEFPkKWAc461qYA4wQ59JUho+Ai61rYgZwC3DYWEKRX4HrrWuTHPxNe8a4+J34B7jfukZJAE4CXjMueLdsAoatahX9hob\/x26npFWx+wrIe5LWOuemUnc8FLNxYEjS66qXDElaLWkcWJq646hCJD0u6Y7IfcTiJhlIiXbJAm6T9Fas9hOyS9KaVJevmGfIdknbIrafiqRnStSbOrBY0hZJa2P2k4gkZ0opIcCY\/I36aknTkj6XtNM593Gb3x0kKROSbrUYfbUF\/1h8R4fx+yzwAnBKm+MW4x+FDwK7MBh9zQFYSXePPA4AF7Q5PksJBV7Gnz0EfJAspTIymmQpFZLR5HiQMkEKKfQvo0knKcNkKXNoO+wFVkraIem0EJ1I+kbSjc65Hwr9DEvaqt6GxDOS9ssPtQ9KGpE0KulyxX8UNB+7JY0FHxIT7swo0u+Zcgx4rNNfInAq8CS2n7eEvXwRT0aTslK+AFb0kMP+iDksxARwch1kNOlVyqf0OHUHP6Xo\/QS5dKI\/KaST0aRbKX8Al5bMqZ5SSC+jSTdSHi0jo9ZSgGcMA55PylYCTAGlblIAB7xiGHBbKSHBXspuspQ5OWYpPZKltAk4S4lPKSkvGwYcVApwRpbSP0GkADfgJ3WfVUEpz\/WaTO2lAG822qqalE+A08skVFspwO2FtqoipZyMiklZ3mPMV9L+839rKf3JKEh5KUHAnTgCPMACq52ARcAjwPQ8bVlJCSOjQlLAP4a4mUJBgXOAMeDDLttJLSWsjIpJafI9vng\/lTw+lZQ4MioqpV9iS4krI0vpiTQyClI2ByhIFQgtJa2MLGVebGS0BHy8SNnWxfETWMpoCXjgpTTyXI\/\/nL\/IX8CDBNgVItiCnUYwL0q6N1SbhuyTtNo591vxB\/jlFqOSVkg6QX7C3l7n3OEQHQddQdWQsknSfSHbNaKjlJgEX9KWpfRH8LmwzjkkbZC0OXTbBiyXlHTzsyiTkwdEyoykdc65fSk7jTZbfACkbHTObbcOIjj4IfHTaUaswehrxmQtwG+rd9S60gswBdxpXatkAKuAX4yL3olDwKh1jZKDX+v+mXHxi+wBzraujRnAEuB5\/KooS\/4GnsDvNpEBLgPewO8CkZJ\/gVeBi6xrUEmAq4B3EoiYBbYAI9Y51wLgGuBZwu\/lewB4ihrctCu7iTBwhaQ1ja9rJfWyE\/UxSR9IGpc07pz7OnyEcaiskFbwE5PP1\/9vR2i+IaH5doTWNyNMSvrROTdtE20mk8lkMplMJpNZgP8A8PDrE+wzPYYAAAAASUVORK5CYII="
+        },
+        "bereshit": "1",
+        "seed": "ZvChIx6JAEqEwKtpeSfZdbiuc3QvCyYPxm1zu2Ys5i3R9Dcn5Vd8iF6c\/Ppe4y36Ur6VAbRHe4fY7XmDkv1J5LSXTR0unpen\/VLeVAmjiodzIQ9yXic1pyrAkCZhQTGbOTyQwiRj+CjjR8uiY4eB+oCgAlvP415VPbMrCwC\/9nTexlK1j4PD0pH1bS4yac838bgeAk9P\/LWN9N3MJQXHvWT18z6yJGtYQwsxwd\/FvxE=",
+        "location_host": "www.ticketswap.com",
+        "storage": 3,
+        "protocol": "https:"
+    };
+    winsocks();</script>
+</body>
+</html>
